@@ -5,9 +5,13 @@
     "allowJs": true,
     "sourceMap": true,
     "outDir": "dist",
+    "module": "es2020",
+    "moduleResolution": "node",
+    "resolveJsonModule": true
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "bin/git-pull-run.ts"
   ],
   "exclude": [
     "node_modules/**/*"
