@@ -1,8 +1,6 @@
 import debugLog from 'debug';
 import { getAbsolutePath } from './getAbsolutePath.js';
-// import { runGit } from './runGit';
-// import { execaSync } from 'execa';
-import { getChangedFiles } from './getChangedFiles.js';
+import { getChanges } from './getChanges.js';
 import { getGitDirectory } from './getGitDirectory.js';
 import { runCommand } from './runCommand.js';
 import { runScript } from './runScript.js';
@@ -19,28 +17,27 @@ const info = debugLog.debug('git-pull-run');
 info.log = console.log.bind(console);
 
 export async function gitPullRun({ pattern, command, script }: Options): Promise<void> {
-  // const regex = '(^packages/.*/package-lock.json)|(^package-lock.json)';
-  // const glob = 'package-lock.json';
-
   try {
     const gitDir = await getGitDirectory();
-    const changedFiles = await getChangedFiles(pattern);
+    const changes = await getChanges(pattern);
 
-    if (changedFiles.length === 0) {
+    if (changes.length === 0) {
       info(`No relevant changes for pattern '${pattern}'`);
       return;
+    } else {
+      info(`Found ${changes.length} ${changes.length === 1 ? 'change' : 'changes'} for pattern '${pattern}'`);
     }
 
-    for (const file of changedFiles) {
-      const directory = getAbsolutePath(gitDir, file);
+    for (const change of changes) {
+      const { directory } = getAbsolutePath(gitDir, change);
 
       if (command) {
-        info(`Running command '${command}' for file '${file}'...`);
+        info(`Running command '${command}' for change '${change}' in directory ${directory}...`);
         const result = await runCommand(command, directory);
       }
 
       if (script) {
-        info(`Running script '${script}' for file '${file}'...`);
+        info(`Running script '${script}' for change '${change}' in directory ${directory}...`);
         const result = await runScript(script, directory);
       }
     }

@@ -2,9 +2,9 @@ import { runGit } from './runGit.js';
 import debugLog from 'debug';
 import micromatch from 'micromatch';
 
-const debug = debugLog('git-pull-run:getChangedFiles');
+const debug = debugLog('git-pull-run:getChanges');
 
-export async function getChangedFiles(pattern: string): Promise<string[]> {
+export async function getChanges(pattern: string): Promise<string[]> {
   debug('Get changed files');
 
   const cmd = 'git diff --name-only HEAD@{1} HEAD';

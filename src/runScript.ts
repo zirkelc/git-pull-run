@@ -1,4 +1,4 @@
-import { execa } from 'execa';
+import { execa, ExecaError } from 'execa';
 import debugLog from 'debug';
 
 const debug = debugLog('git-pull-run:runScript');
@@ -8,13 +8,17 @@ export async function runScript(script: string, cwd: string): Promise<string> {
 
   try {
     const commands = ['run-script', script];
-    const { stdout, exitCode } = await execa('npm', commands, { cwd });
+    const cmdProcess = execa('npm', commands, { cwd });
+    debug.enabled && cmdProcess.stdout?.pipe(process.stdout);
+
+    const { stdout, exitCode } = await cmdProcess;
     debug(`Script executed with exit code: ${exitCode}`);
 
     return stdout;
   } catch (error) {
-    console.log(error);
-    throw new Error('');
-    //throw new Error(error);
+    const cmdError = error as ExecaError;
+    const { exitCode, message } = cmdError;
+    debug(`Script failed with exit code: ${exitCode}`);
+    throw new Error(message);
   }
 }

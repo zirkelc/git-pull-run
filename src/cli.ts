@@ -13,7 +13,7 @@ type Options = {
   debug: boolean;
 };
 
-const debug = debugLog('git-pull-run:cli');
+const debug = debugLog('git-pull-run');
 const packageJsonPath = path.join(fileURLToPath(import.meta.url), '../../package.json');
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath).toString());
 const version = packageJson.version;
@@ -30,10 +30,11 @@ const options = program.opts<Options>();
 
 if (options.debug) debugLog.enable('git-pull-run*');
 
-debug(`Running git-pull-run@${version}`);
+debug(`Started git-pull-run@${version}`);
 
 gitPullRun(options)
   .then(() => {
+    debug(`Finished git-pull-run@${version}`);
     process.exitCode = 0;
   })
   .catch(() => {
