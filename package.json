@@ -2,12 +2,13 @@
   "name": "git-pull-run",
   "version": "1.0.0",
   "description": "",
-  "bin": "dist/bin/git-pull-run.js",
+  "bin": "./dist/cli.js",
+  "exports": "./dist/index.js",
   "type": "module",
   "scripts": {
     "compile": "tsc",
     "compile:watch": "tsc --watch",
-    "start": "DEBUG=* node dist/bin/git-pull-run",
+    "start": "DEBUG=* node dist/git-pull-run",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
