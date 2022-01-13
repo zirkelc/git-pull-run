@@ -19,8 +19,8 @@ const packageJson = JSON.parse(fs.readFileSync(packageJsonPath).toString());
 const version = packageJson.version;
 
 const program = new Command()
-  .version(version, '-v --version')
-  .requiredOption('-p, --pattern <glob>', 'pattern to match files')
+  .version(version)
+  .requiredOption('-p, --pattern <glob>', 'pattern to match files (required)')
   .option('-c, --command <command>', 'execute shell command for each matched file', '')
   .option('-s, --script <script>', 'execute npm script for each matched file', '')
   .option('-d, --debug', 'print additional debug information', false)

@@ -15,7 +15,15 @@
     "type": "git",
     "url": "git+https://github.com/zirkelc/git-pull-run.git"
   },
-  "keywords": [],
+  "keywords": [
+    "git",
+    "pull",
+    "run",
+    "npm",
+    "install",
+    "hooks",
+    "post-merge"
+  ],
   "author": "Christian Zirkel",
   "license": "MIT",
   "bugs": {
