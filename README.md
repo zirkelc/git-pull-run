@@ -2,14 +2,16 @@
 # Run Commands on Changes after Git Pull
 Automatically run commands like **npm install** when fetching changes from git, but only if certain files have changed.
 
-## Why?
-For more information, please refer to my: [Automatically Install NPM Dependencies on Git Pull](https://dev.to/zirkelc/automatically-install-npm-dependencies-on-git-pull-bg0)
+## How It Works
+Git invokes the [`post-merge`](https://git-scm.com/docs/githooks#_post_merge) after a  `git pull` was done a local repository. This package will then run `git diff-tree` to get a list of changed files. Each changed file is being matched against the specified pattern and in case of a match, then specified command or script will be executed.
+
+For more information, please refer to my post: [Automatically Install NPM Dependencies on Git Pull](https://dev.to/zirkelc/automatically-install-npm-dependencies-on-git-pull-bg0)
 
 ## Install
 ```sh
 npm install --save-dev git-pull-run
 ```
-
+This package should be executed as a [`post-merge`](https://git-scm.com/docs/githooks#_post_merge) git hook.
 ## Command Line Options
 ```sh
 > npx git-pull-run --help
@@ -23,14 +25,15 @@ Options:
   -d, --debug              print additional debug information (default: false)
   -h, --help               display help for command
 ```
-- `--pattern <glob>`: Required glob pattern to detect if certain files have changed on the remote repository when pulling changes. Each changed file (including path from root) is matched against this pattern.
-- - uses [micromatch](https://www.npmjs.com/package/micromatch) internally and  supports all matching features like wildcards, negation, extglobs and more.
-- `--command <command>`: Command to execute on the shell for each changed file that matches the `pattern`. The command is going to be executed inside the directory of the changed file.
-- - uses [execa](https://github.com/sindresorhus/execa) internally with the `cwd` option set as directory of the matched file.
-- `--script <script>`: NPM script to execute on the shell for each changed file that matches the `pattern`. Same as option `--command "npm run <script>"`. The script is going to be executed inside the directory of the changed file.
-- `--debug`: Run in debug mode and print additional information about the changed files and commands and scripts that are being executed.
+- **`--pattern <pattern>`**: Required glob pattern to detect if certain files have changed on the remote repository when pulling changes. Each changed file (including path from root) is matched against this pattern.
+  - uses [micromatch](https://www.npmjs.com/package/micromatch) internally and  supports all matching features like wildcards, negation, extglobs and more.
+- **`--command <command>`**: Command to execute on the shell for each changed file that matches the `pattern`. The command is going to be executed inside the directory of the changed file.
+  - uses [execa](https://github.com/sindresorhus/execa) internally with the `cwd` option set as directory of the matched file.
+- **`--script <script>`**: NPM script to execute on the shell for each changed file that matches the `pattern`. Same as option **`--command "npm run <script>"`**. The script is going to be executed inside the directory of the changed file.
+- **`--debug`**: Run in debug mode and print additional information about the changed files and commands and scripts that are being executed.
 
 ## Usage
+
 ### Run `npm install` when `package-lock.json` changes
 `post-merge` git hook with [Husky](https://github.com/typicode/husky):
 ```sh
@@ -41,7 +44,7 @@ Options:
 npx git-pull-run -p 'package-lock.json' -c 'npm install'
 ```
 
-### Run `npm install` when in a multi-package monorepo
+### Run `npm install` in a multi-package monorepo
 `post-merge` git hook with [Husky](https://github.com/typicode/husky):
 ```sh
 #!/bin/sh
