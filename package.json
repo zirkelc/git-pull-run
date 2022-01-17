@@ -6,6 +6,7 @@
   "exports": "./dist/index.js",
   "type": "module",
   "scripts": {
+    "prepublishOnly": "npm version patch && npm pack",
     "compile": "rimraf dist && tsc",
     "compile:watch": "tsc --watch",
     "start": "DEBUG=* node dist/git-pull-run",

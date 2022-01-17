@@ -3,7 +3,7 @@
 Automatically run commands like **npm install** when fetching changes from git, but only if certain files have changed.
 
 ## How It Works
-Git invokes the [`post-merge`](https://git-scm.com/docs/githooks#_post_merge) after a  `git pull` was done a local repository. This package will then run `git diff-tree` to get a list of changed files. Each changed file is being matched against the specified pattern and in case of a match, then specified command or script will be executed.
+Git invokes the [`post-merge`](https://git-scm.com/docs/githooks#_post_merge) hook after a `git pull` was done a local repository. This package will then run `git diff-tree` to get a list of changed files. Each changed file is being matched against the specified pattern and in case of a match, the specified command or script will be executed.
 
 For more information, please refer to my post: [Automatically Install NPM Dependencies on Git Pull](https://dev.to/zirkelc/automatically-install-npm-dependencies-on-git-pull-bg0)
 
