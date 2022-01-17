@@ -41,7 +41,7 @@ Options:
 . "$(dirname "$0")/_/husky.sh"
 
 # matches only the package-lock.json inside project directory
-npx git-pull-run -p 'package-lock.json' -c 'npm install'
+npx git-pull-run --pattern "package-lock.json" --command "npm install"
 ```
 
 ### Run `npm install` in a multi-package monorepo
@@ -52,7 +52,7 @@ npx git-pull-run -p 'package-lock.json' -c 'npm install'
 
 # assumes monorepo structure with multiple packages in directory /packages
 # matches any of these package-lock.json
-npx git-pull-run -p 'packages/*/package-lock.json' -c 'npm install'
+npx git-pull-run --pattern "packages/*/package-lock.json" --command "npm install"
 ```
 
 
@@ -66,3 +66,5 @@ The `package.json` contains the semver versions of each package whereas the `pac
 >
 > Now, if you change `package.json` such that the versions in `package-lock.json` are no longer valid, your `npm install` will be treated as if you'd done `npm install some-pkg@x.y.z`, where x.y.z is the new version in the `package.json` for some-package.
 
+## What about Yarn?
+The `yarn.lock` should be used as pattern option (instead of `package-lock.json`) and the `yarn install` should be used as command option (instead of `npm install`). If you want to run scripts defined in the `package.json` with yarn instead of npm, please use the command option with `--command "yarn run <script>"` instead of `--script "<script>"`.
