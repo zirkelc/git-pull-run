@@ -43,6 +43,7 @@ Options:
 # matches only the package-lock.json inside project directory
 npx git-pull-run --pattern "package-lock.json" --command "npm install"
 ```
+_On Windows, white spaces in the command like `npm install` must be escaped with backslashes, for example:_ `npx git-pull-run --pattern "package-lock.json" --command "npm\ install"`
 
 ### Run `npm install` in a multi-package monorepo
 `post-merge` git hook with [Husky](https://github.com/typicode/husky):
@@ -65,6 +66,12 @@ The `package.json` contains the semver versions of each package whereas the `pac
 > `npm install` does not ignore `package.json` versions, nor does it ignore the `package-lock.json`. What it does is verify that the `package.json` and `package-lock.json` correspond to each other. That is, if the semver versions described in `package.json` fit with the locked versions in `package-lock.json`, `npm install` will use the latter completely, just like `npm ci` would.
 >
 > Now, if you change `package.json` such that the versions in `package-lock.json` are no longer valid, your `npm install` will be treated as if you'd done `npm install some-pkg@x.y.z`, where x.y.z is the new version in the `package.json` for some-package.
+
+### Error: Command failed with exit code 1: npm
+
+On Windows, white spaces in the command like `npm install` must be escaped with backslashes, for example: `npx git-pull-run --pattern "package-lock.json" --command "npm\ install"`
+
+[Issue: Command failed with exit code 1: npm #1](https://github.com/zirkelc/git-pull-run/issues/1)
 
 ## What about Yarn?
 The `yarn.lock` should be used as pattern option (instead of `package-lock.json`) and the `yarn install` should be used as command option (instead of `npm install`). If you want to run scripts defined in the `package.json` with yarn instead of npm, please use the command option with `--command "yarn run <script>"` instead of `--script "<script>"`.
