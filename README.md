@@ -58,7 +58,6 @@ _On Windows, white spaces in the command like `npm install` must be escaped with
 npx git-pull-run --pattern "packages/*/package-lock.json" --command "npm install"
 ```
 
-
 ## FAQ
 ### Match `package.json` or `package-lock.json`?
 The `package.json` contains the semver versions of each package whereas the `package-lock.json` contains the exactly installed version of each package. See [But what the hell is package-lock.json?](https://dev.to/saurabhdaware/but-what-the-hell-is-package-lock-json-b04) for more information.
