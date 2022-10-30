@@ -1,0 +1,20 @@
+{
+  // https://code.visualstudio.com/docs/editor/debugging
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node-terminal",
+      "name": "Debug Test File (npm run test)",
+      "request": "launch",
+      "command": "npm run test -- ${fileBasenameNoExtension}",
+      "cwd": "${fileDirname}"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Debug Current File (ts-node)",
+      "request": "launch",
+      "command": "ts-node -- ${fileBasenameNoExtension}",
+      "cwd": "${fileDirname}"
+    }
+  ]
+}

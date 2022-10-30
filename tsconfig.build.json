@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  // overwrite included files from base tsconfig.json
+  // include only src folder to have a flat output hierarchy with dist/index.js
+  "include": [
+    "src/**/*.ts",
+  ],
+  // exclude test files from build, otherwise Jest will run the transpiled files
+  "exclude": [
+    "*.test.ts",
+    "__tests__/**/*.ts",
+  ]
+}

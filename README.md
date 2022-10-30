@@ -20,16 +20,18 @@ Usage: git-pull-run [options]
 Options:
   -V --version             output the version number
   -p, --pattern <glob>     pattern to match files (required)
-  -c, --command <command>  execute shell command for each matched file (default: "")
-  -s, --script <script>    execute npm script for each matched file (default: "")
+  -c, --command <command>  execute shell command for each matched file
+  -s, --script <script>    execute npm script for each matched file
+  -m, --message <message>  print message to the console if matches were found
   -d, --debug              print additional debug information (default: false)
   -h, --help               display help for command
 ```
 - **`--pattern <pattern>`**: Required glob pattern to detect if certain files have changed on the remote repository when pulling changes. Each changed file (including path from root) is matched against this pattern.
-  - uses [micromatch](https://www.npmjs.com/package/micromatch) internally and  supports all matching features like wildcards, negation, extglobs and more.
+  - uses [micromatch](https://www.npmjs.com/package/micromatch) internally and supports all matching features like wildcards, negation, extglobs and more.
 - **`--command <command>`**: Command to execute on the shell for each changed file that matches the `pattern`. The command is going to be executed inside the directory of the changed file.
   - uses [execa](https://github.com/sindresorhus/execa) internally with the `cwd` option set as directory of the matched file.
 - **`--script <script>`**: NPM script to execute on the shell for each changed file that matches the `pattern`. Same as option **`--command "npm run <script>"`**. The script is going to be executed inside the directory of the changed file.
+- **`--message <message>`**: Message to print to the shell if any changed files matches the `pattern`. The message is printed only once and not for each changed file.
 - **`--debug`**: Run in debug mode and print additional information about the changed files and commands and scripts that are being executed.
 
 ## Usage
