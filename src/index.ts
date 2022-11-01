@@ -16,16 +16,20 @@ export type Options = {
 
 debugLog.enable('git-pull-run');
 
-function humanize(ms: number): string;
-function humanize(ms: string): number;
-function humanize(ms: number | string): string | number {
-  return ``;
-}
-debugLog.humanize = humanize;
+// function humanize(ms: number): string;
+// function humanize(ms: string): number;
+// function humanize(ms: number | string): string | number {
+//   return ``;
+// }
+// debugLog.humanize = humanize;
 
 const info = debugLog.debug('git-pull-run');
 info.log = console.log.bind(console);
 
+// const test = debugLog('test');
+
+// test("test 1");
+// test("test 2");
 
 export { info };
 
@@ -45,19 +49,29 @@ export async function gitPullRun({ pattern, message, command, script }: Options)
       echoMessage(message);
     }
 
-    for (const change of changes) {
-      const { directory } = getAbsolutePath(gitDir, change);
+    if (command || script) {
+      info(`Running tasks for ${changes.length} ${changes.length === 1 ? 'change' : 'changes'}`);
 
-      if (command) {
-        info(`Running command '${command}' for change '${change}' in directory ${directory}...`);
-        await runCommand(command, directory);
-      }
+      for (const change of changes) {
+        const { directory } = getAbsolutePath(gitDir, change);
 
-      if (script) {
-        info(`Running script '${script}' for change '${change}' in directory ${directory}...`);
-        await runScript(script, directory);
+        info(`> ${change}`);
+
+        if (command) {
+          // info(`Running command '${command}' for change '${change}' in directory ${directory}...`);
+          info(`${directory} > ${command}`);
+          await runCommand(command, directory);
+        }
+
+        if (script) {
+          // info(`Running script '${script}' for change '${change}' in directory ${directory}...`);
+          info(`${directory} > ${command}`);
+          await runScript(script, directory);
+        }
       }
     }
+
+
   } catch (error) {
     console.log('error', error);
   }
