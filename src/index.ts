@@ -15,8 +15,17 @@ export type Options = {
 };
 
 debugLog.enable('git-pull-run');
+
+function humanize(ms: number): string;
+function humanize(ms: string): number;
+function humanize(ms: number | string): string | number {
+  return ``;
+}
+debugLog.humanize = humanize;
+
 const info = debugLog.debug('git-pull-run');
 info.log = console.log.bind(console);
+
 
 export { info };
 
