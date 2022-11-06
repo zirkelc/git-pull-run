@@ -1,7 +1,7 @@
 import debugLog from 'debug';
 import { parse, resolve } from 'path';
 
-const debug = debugLog.debug('git-pull-run:getAbsolutePath');
+const debug = debugLog('git-pull-run:getAbsolutePath');
 
 export function getAbsolutePath(baseDir: string, path: string) {
   const { dir: relativeDir, base: file } = parse(path);

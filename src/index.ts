@@ -1,5 +1,6 @@
+import { dim, green } from 'colorette';
 import debugLog from 'debug';
-import { echoMessage } from './echoMessage.js';
+import { Listr, ListrTask } from 'listr2';
 import { getAbsolutePath } from './getAbsolutePath.js';
 import { getChanges } from './getChanges.js';
 import { getGitDirectory } from './getGitDirectory.js';
@@ -14,65 +15,70 @@ export type Options = {
   debug: boolean;
 };
 
-debugLog.enable('git-pull-run');
-
-// function humanize(ms: number): string;
-// function humanize(ms: string): number;
-// function humanize(ms: number | string): string | number {
-//   return ``;
-// }
-// debugLog.humanize = humanize;
-
-const info = debugLog.debug('git-pull-run');
-info.log = console.log.bind(console);
-
-// const test = debugLog('test');
-
-// test("test 1");
-// test("test 2");
-
-export { info };
+export type Context = {
+  gitDir: string;
+  changes: string[];
+};
 
 export async function gitPullRun({ pattern, message, command, script }: Options): Promise<void> {
-  try {
-    const gitDir = await getGitDirectory();
-    const changes = await getChanges(pattern);
+  const runner = new Listr<Context>(
+    [
+      {
+        title: 'Preparing git-pull-run...',
+        task: async (ctx, task) => {
+          task.output = 'Preparing git-pull-run...';
+          ctx.gitDir = await getGitDirectory();
 
-    if (changes.length === 0) {
-      info(`No relevant changes for pattern '${pattern}'`);
-      return;
-    } else {
-      info(`Found ${changes.length} ${changes.length === 1 ? 'change' : 'changes'} for pattern '${pattern}'`);
-    }
+          task.output = `Collecting changes for ${green(pattern)}...`
+          ctx.changes = await getChanges(pattern);
 
-    if (message) {
-      echoMessage(message);
-    }
+          task.output = ctx.changes.length > 0
+            ? `Found ${ctx.changes.length} ${ctx.changes.length === 1 ? 'change' : 'changes'} for ${green(pattern)}`
+            : `No relevant changes for ${green(pattern)}`;
+        },
+        options: { persistentOutput: true },
+      },
+      {
+        title: message,
+        task: async (ctx, task) => { },
+        options: { persistentOutput: true },
+        enabled: (ctx) => !!message && message.length > 0 && ctx.changes && ctx.changes.length > 0,
+      },
+      {
+        title: 'Running tasks...',
+        task: (ctx, task): Listr => {
+          const subtasks = ctx.changes.map<ListrTask>(change => {
+            const { directory } = getAbsolutePath(ctx.gitDir, change);
 
-    if (command || script) {
-      info(`Running tasks for ${changes.length} ${changes.length === 1 ? 'change' : 'changes'}`);
+            return {
+              title: `${dim(directory)}`,
+              task: async (ctx, task) => task.newListr([
+                {
+                  title: `${green(command)}`,
+                  task: () => runCommand(command, directory),
+                  enabled: () => !!command,
+                },
+                {
+                  title: `npm run ${green(script)}`,
+                  task: () => runScript(script, directory),
+                  enabled: () => !!script,
+                },
+              ])
+            }
+          });
 
-      for (const change of changes) {
-        const { directory } = getAbsolutePath(gitDir, change);
+          return task.newListr(
+            [...subtasks],
+            { concurrent: true, rendererOptions: { collapse: false } }
+          )
+        },
+        enabled: (ctx) => (!!command || !!script) && ctx.changes && ctx.changes.length > 0,
+        // skip: (ctx) => ctx.changes && ctx.changes.length === 0,
+        options: { persistentOutput: true },
+      },
+    ],
+    { concurrent: false }
+  );
 
-        info(`> ${change}`);
-
-        if (command) {
-          // info(`Running command '${command}' for change '${change}' in directory ${directory}...`);
-          info(`${directory} > ${command}`);
-          await runCommand(command, directory);
-        }
-
-        if (script) {
-          // info(`Running script '${script}' for change '${change}' in directory ${directory}...`);
-          info(`${directory} > ${command}`);
-          await runScript(script, directory);
-        }
-      }
-    }
-
-
-  } catch (error) {
-    console.log('error', error);
-  }
+  await runner.run();
 }

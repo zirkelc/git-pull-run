@@ -14,7 +14,7 @@ type Options = {
   debug: boolean;
 };
 
-const debug = debugLog('git-pull-run');
+const debug = debugLog('git-pull-run:cli');
 const packageJsonPath = path.join(fileURLToPath(import.meta.url), '../../package.json');
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath).toString());
 const version = packageJson.version;

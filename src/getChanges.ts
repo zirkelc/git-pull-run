@@ -1,6 +1,7 @@
 import { runGit } from './runGit.js';
 import debugLog from 'debug';
 import micromatch from 'micromatch';
+import type { Context } from './index.js';
 
 const debug = debugLog('git-pull-run:getChanges');
 
@@ -13,8 +14,9 @@ export async function getChanges(pattern: string): Promise<string[]> {
   const files = result.split('\n');
   debug('Changed files:', files);
 
-  const matches = micromatch(files, pattern);
-  debug(`Match files with pattern '${pattern}':`, matches);
+  const changes = micromatch(files, pattern);
+  debug(`Changes that match pattern '${pattern}':`, changes);
 
-  return matches;
+  // ctx.changes = changes;
+  return changes;
 }
