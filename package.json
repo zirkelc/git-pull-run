@@ -8,7 +8,8 @@
   "scripts": {
     "build": "rimraf dist && tsc --project tsconfig.build.json",
     "build:watch": "tsc --watch",
-    "release": "npm version $(semver $npm_package_version -i patch) && npm publish --tag latest",
+    "release:minor": "npm version $(semver $npm_package_version -i minor) && npm publish --tag latest",
+    "release:patch": "npm version $(semver $npm_package_version -i patch) && npm publish --tag latest",
     "release:next": "npm version $(semver $npm_package_version -i prerelease --preid next ) && npm publish --tag next",
     "start": "ts-node ./src/cli",
     "test": "jest",
