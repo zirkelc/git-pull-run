@@ -1,4 +1,6 @@
-[![npm version](https://badge.fury.io/js/git-pull-run.svg)](https://badge.fury.io/js/git-pull-run)
+![npm](https://img.shields.io/npm/v/git-pull-run?label=git-pull-run)
+![npm](https://img.shields.io/npm/dt/git-pull-run)
+
 # Run Commands on Changes after Git Pull
 Automatically run commands like **npm install** when fetching changes from git, but only if certain files have changed.
 
