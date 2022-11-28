@@ -22,9 +22,9 @@ const version = packageJson.version;
 const program = new Command()
   .version(version)
   .requiredOption('-p, --pattern <glob>', 'pattern to match files (required)')
-  .option('-c, --command <command>', 'execute shell command for each matched file',)
-  .option('-s, --script <script>', 'execute npm script for each matched file',)
-  .option('-m, --message <message>', 'print message to the console if matches were found',)
+  .option('-c, --command <command>', 'execute shell command for each matched file')
+  .option('-s, --script <script>', 'execute npm script for each matched file')
+  .option('-m, --message <message>', 'print message to the console if matches were found')
   .option('-d, --debug', 'print additional debug information', false)
   .parse();
 

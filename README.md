@@ -31,7 +31,7 @@ Options:
 - **`--command <command>`**: Command to execute on the shell for each changed file that matches the `pattern`. The command is going to be executed inside the directory of the changed file.
   - uses [execa](https://github.com/sindresorhus/execa) internally with the `cwd` option set as directory of the matched file.
 - **`--script <script>`**: NPM script to execute on the shell for each changed file that matches the `pattern`. Same as option **`--command "npm run <script>"`**. The script is going to be executed inside the directory of the changed file.
-- **`--message <message>`**: Message to print to the shell if any changed files matches the `pattern`. The message is printed only once and not for each changed file.
+- **`--message <message>`**: Message to print on the shell if any changed files matches the `pattern`. The message is printed only once and not for each changed file.
 - **`--debug`**: Run in debug mode and print additional information about the changed files and commands and scripts that are being executed.
 
 ## Usage
@@ -58,6 +58,16 @@ _On Windows, white spaces in the command like `npm install` must be escaped with
 npx git-pull-run --pattern "packages/*/package-lock.json" --command "npm install"
 ```
 
+### Show custom message
+`post-merge` git hook with [Husky](https://github.com/typicode/husky):
+```sh
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# matches only the package-lock.json inside project directory
+npx git-pull-run --pattern "package-lock.json" --message "Some packages were changed. You may run npm install to update your dependencies..."
+```
+
 ## FAQ
 ### Match `package.json` or `package-lock.json`?
 The `package.json` contains the semver versions of each package whereas the `package-lock.json` contains the exactly installed version of each package. See [But what the hell is package-lock.json?](https://dev.to/saurabhdaware/but-what-the-hell-is-package-lock-json-b04) for more information.
@@ -75,4 +85,4 @@ On Windows, white spaces in the command like `npm install` must be escaped with 
 [Issue: Command failed with exit code 1: npm #1](https://github.com/zirkelc/git-pull-run/issues/1)
 
 ## What about Yarn?
-The `yarn.lock` should be used as pattern option (instead of `package-lock.json`) and the `yarn install` should be used as command option (instead of `npm install`). If you want to run scripts defined in the `package.json` with yarn instead of npm, please use the command option with `--command "yarn run <script>"` instead of `--script "<script>"`.
+The `yarn.lock` file should be used as pattern option (instead of `package-lock.json`) and the `yarn install` should be used as command option (instead of `npm install`). If you want to run scripts defined in the `package.json` with yarn instead of npm, please use the command option with `--command "yarn run <script>"` instead of `--script "<script>"`.

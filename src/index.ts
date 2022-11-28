@@ -1,5 +1,4 @@
 import { dim, green } from 'colorette';
-import debugLog from 'debug';
 import { Listr, ListrTask } from 'listr2';
 import { getAbsolutePath } from './getAbsolutePath.js';
 import { getChanges } from './getChanges.js';
@@ -73,7 +72,6 @@ export async function gitPullRun({ pattern, message, command, script }: Options)
           )
         },
         enabled: (ctx) => (!!command || !!script) && ctx.changes && ctx.changes.length > 0,
-        // skip: (ctx) => ctx.changes && ctx.changes.length === 0,
         options: { persistentOutput: true },
       },
     ],
