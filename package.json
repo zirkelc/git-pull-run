@@ -1,6 +1,6 @@
 {
   "name": "git-pull-run",
-  "version": "1.1.1-next.3",
+  "version": "1.2.0",
   "description": "Run commands and scripts after git pull",
   "bin": "./dist/cli.js",
   "exports": "./dist/index.js",
