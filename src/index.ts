@@ -1,5 +1,6 @@
 import { dim, green } from 'colorette';
-import { Listr, ListrTask } from 'listr2';
+import { Listr } from 'listr2';
+import type { ListrTask } from 'listr2';
 import { getAbsolutePath } from './getAbsolutePath.js';
 import { getChanges } from './getChanges.js';
 import { getGitDirectory } from './getGitDirectory.js';
@@ -12,6 +13,7 @@ export type Options = {
   command: string;
   script: string;
   debug: boolean;
+  once: boolean;
 };
 
 export type Context = {
@@ -19,7 +21,7 @@ export type Context = {
   changes: string[];
 };
 
-export async function gitPullRun({ pattern, message, command, script }: Options): Promise<void> {
+export async function gitPullRun({ pattern, message, command, script, once }: Options): Promise<void> {
   const runner = new Listr<Context>(
     [
       {
@@ -46,24 +48,28 @@ export async function gitPullRun({ pattern, message, command, script }: Options)
       {
         title: 'Running tasks...',
         task: (ctx, task): Listr => {
-          const subtasks = ctx.changes.map<ListrTask>(change => {
-            const { directory } = getAbsolutePath(ctx.gitDir, change);
+          const createTasks = (directory: string): ListrTask => ({
+            title: `${dim(directory)}`,
+            task: async (ctx, task) => task.newListr([
+              {
+                title: `${green(command)}`,
+                task: () => runCommand(command, directory),
+                enabled: () => !!command,
+              },
+              {
+                title: `npm run ${green(script)}`,
+                task: () => runScript(script, directory),
+                enabled: () => !!script,
+              },
+            ])
+          })
 
-            return {
-              title: `${dim(directory)}`,
-              task: async (ctx, task) => task.newListr([
-                {
-                  title: `${green(command)}`,
-                  task: () => runCommand(command, directory),
-                  enabled: () => !!command,
-                },
-                {
-                  title: `npm run ${green(script)}`,
-                  task: () => runScript(script, directory),
-                  enabled: () => !!script,
-                },
-              ])
-            }
+          const subtasks = once
+            ? [createTasks(ctx.gitDir)]
+            : ctx.changes.map<ListrTask>(change => {
+              const { directory } = getAbsolutePath(ctx.gitDir, change);
+
+            return createTasks(directory);
           });
 
           return task.newListr(

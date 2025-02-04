@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
 import debugLog from 'debug';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { gitPullRun } from './index.js';
 
 type Options = {
@@ -12,6 +12,7 @@ type Options = {
   command: string;
   script: string;
   debug: boolean;
+  once: boolean;
 };
 
 const debug = debugLog('git-pull-run:cli');
@@ -26,6 +27,7 @@ const program = new Command()
   .option('-s, --script <script>', 'execute npm script for each matched file')
   .option('-m, --message <message>', 'print message to the console if matches were found')
   .option('-d, --debug', 'print additional debug information', false)
+  .option('-o, --once', 'run command only once if any files match the pattern', false)
   .parse();
 
 const options = program.opts<Options>();
