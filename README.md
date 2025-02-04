@@ -26,6 +26,7 @@ Options:
   -s, --script <script>    execute npm script for each matched file
   -m, --message <message>  print message to the console if matches were found
   -d, --debug              print additional debug information (default: false)
+  -o, --once               run command only once if any files match the pattern (default: false)
   -h, --help               display help for command
 ```
 - **`--pattern <pattern>`**: Required glob pattern to detect if certain files have changed on the remote repository when pulling changes. Each changed file (including path from root) is matched against this pattern.
@@ -34,6 +35,7 @@ Options:
   - uses [execa](https://github.com/sindresorhus/execa) internally with the `cwd` option set as directory of the matched file.
 - **`--script <script>`**: NPM script to execute on the shell for each changed file that matches the `pattern`. Same as option **`--command "npm run <script>"`**. The script is going to be executed inside the directory of the changed file.
 - **`--message <message>`**: Message to print on the shell if any changed files matches the `pattern`. The message is printed only once and not for each changed file.
+- **`--once`**: Run the command or script only once in the git root directory if any files match the pattern, instead of running it for each matched file.
 - **`--debug`**: Run in debug mode and print additional information about the changed files and commands and scripts that are being executed.
 
 ## Usage
