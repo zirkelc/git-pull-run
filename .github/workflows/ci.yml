@@ -36,15 +36,15 @@ jobs:
 
       - name: Setup and Install
         id: install
-        uses: zirkelc/setup-and-install@v1
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
       - name: Build
-        run: pnpm build
+        run: npm run build
 
       - name: Test
-        run: pnpm test
+        run: npm run test
 
 
   release:
@@ -58,10 +58,12 @@ jobs:
 
       - name: Setup and Install
         id: install
-        uses: zirkelc/setup-and-install@v1
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
       - name: Build
-        run: pnpm build
+        run: npm run build
 
       - name: Publish to NPM
         id: publish
