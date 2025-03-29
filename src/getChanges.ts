@@ -1,7 +1,7 @@
-import { runGit } from './runGit.js';
 import debugLog from 'debug';
 import micromatch from 'micromatch';
 import type { Context } from './index.js';
+import { runGit } from './runGit.js';
 
 const debug = debugLog('git-pull-run:getChanges');
 

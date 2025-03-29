@@ -1,4 +1,4 @@
-import type { JestConfigWithTsJest } from 'ts-jest'
+import type { JestConfigWithTsJest } from 'ts-jest';
 
 const config: JestConfigWithTsJest = {
   preset: 'ts-jest/presets/default-esm', // or other ESM presets
@@ -16,11 +16,7 @@ const config: JestConfigWithTsJest = {
       },
     ],
   },
-  transformIgnorePatterns: [
-    'node:buffer',
-    'execa',
-    '<rootDir>/node_modules/',
-  ],
+  transformIgnorePatterns: ['node:buffer', 'execa', '<rootDir>/node_modules/'],
   extensionsToTreatAsEsm: ['.ts'],
 
   testPathIgnorePatterns: ['/node_modules/', '/dist/'],

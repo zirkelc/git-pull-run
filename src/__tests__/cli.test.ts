@@ -3,9 +3,12 @@ import type { CLITestEnvironment } from '@gmrchk/cli-testing-library/lib/types';
 
 jest.setTimeout(10_000);
 
-const clearDebugOutput = (result: string[]) => result
-  .filter((line) => !line.startsWith('Debugger attached'))
-  .filter((line) => !line.startsWith('Waiting for the debugger to disconnect'));
+const clearDebugOutput = (result: string[]) =>
+  result
+    .filter((line) => !line.startsWith('Debugger attached'))
+    .filter(
+      (line) => !line.startsWith('Waiting for the debugger to disconnect'),
+    );
 
 describe('Run CLI options', () => {
   let testEnv: CLITestEnvironment;
@@ -16,8 +19,12 @@ describe('Run CLI options', () => {
 
     testEnv.execute = async (...params: Parameters<typeof execute>) => {
       const { stdout, stderr, ...result } = await execute(...params);
-      return { ...result, stdout: clearDebugOutput(stdout), stderr: clearDebugOutput(stderr) };
-    }
+      return {
+        ...result,
+        stdout: clearDebugOutput(stdout),
+        stderr: clearDebugOutput(stderr),
+      };
+    };
   });
 
   afterEach(async () => {
@@ -27,7 +34,7 @@ describe('Run CLI options', () => {
   test('Print version', async () => {
     const { code, stdout, stderr } = await testEnv.execute(
       'tsx',
-      './src/cli.ts --version'
+      './src/cli.ts --version',
     );
 
     const { version } = await import('../../package.json');
@@ -40,7 +47,7 @@ describe('Run CLI options', () => {
   test('Print help', async () => {
     const { code, stdout, stderr } = await testEnv.execute(
       'tsx',
-      './src/cli.ts --help'
+      './src/cli.ts --help',
     );
 
     expect(code).toBe(0);
@@ -65,7 +72,7 @@ describe('Run CLI options', () => {
   test('Fail without required options', async () => {
     const { code, stdout, stderr } = await testEnv.execute(
       'tsx',
-      './src/cli.ts'
+      './src/cli.ts',
     );
 
     expect(code).toBe(1);

@@ -3,12 +3,7 @@
   "compilerOptions": {},
   // overwrite included files from base tsconfig.json
   // include only src folder to have a flat output hierarchy with dist/index.js
-  "include": [
-    "src/**/*",
-  ],
+  "include": ["src/**/*"],
   // exclude test files from build, otherwise Jest will run the transpiled files
-  "exclude": [
-    "**/*.test.ts",
-    "__tests__",
-  ]
+  "exclude": ["**/*.test.ts", "__tests__"]
 }

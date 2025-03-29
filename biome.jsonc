@@ -41,5 +41,13 @@
       "allowComments": true,
       "allowTrailingCommas": true
     }
-  }
+  },
+  "overrides": [
+    {
+      "include": ["**/package.json"],
+      "formatter": {
+        "lineWidth": 1
+      }
+    }
+  ]
 }
