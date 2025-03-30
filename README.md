@@ -41,7 +41,8 @@ Options:
 - **`--once`**: Run the command or script only once in the git root directory if any files match the pattern, instead of running it for each matched file.
 - **`--debug`**: Run in debug mode and print additional information about the changed files and commands and scripts that are being executed.
 
-[!TIP] The `--install` option is a shortcut to automatically detect the right package manager and run the install command. It cannot be used with the `--pattern` and `--command` options, because they are overwritten with the appropriate values for the package manager.
+> [!TIP]
+> The `--install` option is a shortcut to automatically detect the right package manager and run the install command. It cannot be used with the `--pattern` and `--command` options, because they are overwritten with the appropriate values for the package manager.
 
 ## Usage
 
