@@ -1,23 +1,27 @@
-import * as testingLibrary from '@gmrchk/cli-testing-library';
-import type { CLITestEnvironment } from '@gmrchk/cli-testing-library/lib/types';
+import { prepareEnvironment } from '@gmrchk/cli-testing-library';
 
-jest.setTimeout(10_000);
-
-const clearDebugOutput = (result: string[]) => result
-  .filter((line) => !line.startsWith('Debugger attached'))
-  .filter((line) => !line.startsWith('Waiting for the debugger to disconnect'));
+const clearDebugOutput = (result: string[]) =>
+  result
+    .filter((line) => !line.startsWith('Debugger attached'))
+    .filter(
+      (line) => !line.startsWith('Waiting for the debugger to disconnect'),
+    );
 
 describe('Run CLI options', () => {
-  let testEnv: CLITestEnvironment;
+  let testEnv: Awaited<ReturnType<typeof prepareEnvironment>>;
 
   beforeEach(async () => {
-    testEnv = await testingLibrary.prepareEnvironment();
+    testEnv = await prepareEnvironment();
     const { execute } = testEnv;
 
     testEnv.execute = async (...params: Parameters<typeof execute>) => {
       const { stdout, stderr, ...result } = await execute(...params);
-      return { ...result, stdout: clearDebugOutput(stdout), stderr: clearDebugOutput(stderr) };
-    }
+      return {
+        ...result,
+        stdout: clearDebugOutput(stdout),
+        stderr: clearDebugOutput(stderr),
+      };
+    };
   });
 
   afterEach(async () => {
@@ -26,11 +30,11 @@ describe('Run CLI options', () => {
 
   test('Print version', async () => {
     const { code, stdout, stderr } = await testEnv.execute(
-      'tsx',
-      './src/cli.ts --version'
+      'node',
+      './dist/cli.js --version',
     );
 
-    const { version } = await import('../../package.json');
+    const { version } = (await import('../package.json')).default;
 
     expect(code).toBe(0);
     expect(stderr).toHaveLength(0);
@@ -39,17 +43,18 @@ describe('Run CLI options', () => {
 
   test('Print help', async () => {
     const { code, stdout, stderr } = await testEnv.execute(
-      'tsx',
-      './src/cli.ts --help'
+      'node',
+      './dist/cli.js --help default',
     );
 
     expect(code).toBe(0);
     expect(stderr).toHaveLength(0);
     expect(stdout).toMatchInlineSnapshot(`
 [
-  "Usage: cli [options]",
+  "Usage: git-pull-run [options]",
   "Options:",
   "-V, --version            output the version number",
+  "-i, --install            detect package manager and run install",
   "-p, --pattern <glob>     pattern to match files (required)",
   "-c, --command <command>  execute shell command for each matched file",
   "-s, --script <script>    execute npm script for each matched file",
@@ -64,8 +69,8 @@ describe('Run CLI options', () => {
 
   test('Fail without required options', async () => {
     const { code, stdout, stderr } = await testEnv.execute(
-      'tsx',
-      './src/cli.ts'
+      'node',
+      './dist/cli.js',
     );
 
     expect(code).toBe(1);

@@ -1,5 +1,5 @@
-import { execaCommand, ExecaError } from 'execa';
 import debugLog from 'debug';
+import { type ExecaError, execaCommand } from 'execa';
 
 const debug = debugLog('git-pull-run:runGit');
 

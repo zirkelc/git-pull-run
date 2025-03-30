@@ -1,5 +1,5 @@
+import { parse, resolve } from 'node:path';
 import debugLog from 'debug';
-import { parse, resolve } from 'path';
 
 const debug = debugLog('git-pull-run:getAbsolutePath');
 

@@ -1,5 +1,5 @@
-import { execa, ExecaError } from 'execa';
 import debugLog from 'debug';
+import { type ExecaError, execa } from 'execa';
 
 const debug = debugLog('git-pull-run:runScript');
 
