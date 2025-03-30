@@ -1,5 +1,4 @@
 import debugLog from 'debug';
-import type { Context } from './index.js';
 import { runGit } from './runGit.js';
 
 const debug = debugLog('git-pull-run:getGitDirectory');
