@@ -44,12 +44,12 @@ export async function gitPullRun({
               ? `Found ${ctx.changes.length} ${ctx.changes.length === 1 ? 'change' : 'changes'} for ${green(pattern)}`
               : `No relevant changes for ${green(pattern)}`;
         },
-        options: { persistentOutput: true },
+        rendererOptions: { persistentOutput: true },
       },
       {
         title: message,
         task: async (ctx, task) => {},
-        options: { persistentOutput: true },
+        rendererOptions: { persistentOutput: true },
         enabled: (ctx) =>
           !!message &&
           message.length > 0 &&
@@ -86,12 +86,16 @@ export async function gitPullRun({
 
           return task.newListr([...subtasks], {
             concurrent: true,
-            rendererOptions: { collapse: false },
+            rendererOptions: {
+              collapseSubtasks: false,
+              collapseSkips: false,
+              collapseErrors: false,
+            },
           });
         },
         enabled: (ctx) =>
           (!!command || !!script) && ctx.changes && ctx.changes.length > 0,
-        options: { persistentOutput: true },
+        rendererOptions: { persistentOutput: true },
       },
     ],
     { concurrent: false },

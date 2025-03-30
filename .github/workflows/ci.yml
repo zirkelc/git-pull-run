@@ -46,11 +46,10 @@ jobs:
       - name: Test
         run: npm run test
 
-
   release:
     name: Release
     runs-on: ubuntu-latest
-    needs: [lint,test]
+    needs: [lint, test]
     if: github.ref == 'refs/heads/main'
 
     steps:
