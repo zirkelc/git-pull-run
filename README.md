@@ -14,6 +14,7 @@ For more information, please refer to my post: [Automatically Install NPM Depend
 npm install --save-dev git-pull-run
 ```
 This package should be executed as a [`post-merge`](https://git-scm.com/docs/githooks#_post_merge) git hook.
+
 ## Command Line Options
 ```sh
 > npx git-pull-run --help
@@ -21,30 +22,34 @@ Usage: git-pull-run [options]
 
 Options:
   -V --version             output the version number
-  -p, --pattern <glob>     pattern to match files (required)
+  -p, --pattern <glob>     pattern to match files
   -c, --command <command>  execute shell command for each matched file
   -s, --script <script>    execute npm script for each matched file
+  -i, --install            detect the right package manager and run install command
   -m, --message <message>  print message to the console if matches were found
   -d, --debug              print additional debug information (default: false)
   -o, --once               run command only once if any files match the pattern (default: false)
   -h, --help               display help for command
 ```
-- **`--pattern <pattern>`**: Required glob pattern to detect if certain files have changed on the remote repository when pulling changes. Each changed file (including path from root) is matched against this pattern.
+- **`--pattern <pattern>`**: Glob pattern to detect if certain files have changed on the remote repository when pulling changes. Each changed file (including path from root) is matched against this pattern.
   - uses [micromatch](https://www.npmjs.com/package/micromatch) internally and supports all matching features like wildcards, negation, extglobs and more.
 - **`--command <command>`**: Command to execute on the shell for each changed file that matches the `pattern`. The command is going to be executed inside the directory of the changed file.
   - uses [execa](https://github.com/sindresorhus/execa) internally with the `cwd` option set as directory of the matched file.
 - **`--script <script>`**: NPM script to execute on the shell for each changed file that matches the `pattern`. Same as option **`--command "npm run <script>"`**. The script is going to be executed inside the directory of the changed file.
+- **`--install`**: Install dependencies with the right package manager (npm, pnpm, yarn, bun, deno). It implicitly sets the `pattern` and `command` options to the appropriate values for the package manager.
 - **`--message <message>`**: Message to print on the shell if any changed files matches the `pattern`. The message is printed only once and not for each changed file.
 - **`--once`**: Run the command or script only once in the git root directory if any files match the pattern, instead of running it for each matched file.
 - **`--debug`**: Run in debug mode and print additional information about the changed files and commands and scripts that are being executed.
 
+[!TIP] The `--install` option is a shortcut to automatically detect the right package manager and run the install command. It cannot be used with the `--pattern` and `--command` options, because they are overwritten with the appropriate values for the package manager.
+
 ## Usage
 
+Install [Husky](https://typicode.github.io/husky/how-to.html) or any other git hook manager to create a `post-merge` git hook.
+
 ### Run `npm install` when `package-lock.json` changes
-`post-merge` git hook with [Husky](https://github.com/typicode/husky):
 ```sh
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+# .husky/post-merge
 
 # matches only the package-lock.json inside project directory
 npx git-pull-run --pattern "package-lock.json" --command "npm install"
@@ -52,10 +57,8 @@ npx git-pull-run --pattern "package-lock.json" --command "npm install"
 _On Windows, white spaces in the command like `npm install` must be escaped with backslashes, for example:_ `npx git-pull-run --pattern "package-lock.json" --command "npm\ install"`
 
 ### Run `npm install` in a multi-package monorepo
-`post-merge` git hook with [Husky](https://github.com/typicode/husky):
 ```sh
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+# .husky/post-merge
 
 # assumes monorepo structure with multiple packages in directory /packages
 # matches any of these package-lock.json
@@ -63,10 +66,8 @@ npx git-pull-run --pattern "packages/*/package-lock.json" --command "npm install
 ```
 
 ### Show custom message
-`post-merge` git hook with [Husky](https://github.com/typicode/husky):
 ```sh
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+# .husky/post-merge
 
 # matches only the package-lock.json inside project directory
 npx git-pull-run --pattern "package-lock.json" --message "Some packages were changed. You may run npm install to update your dependencies..."
