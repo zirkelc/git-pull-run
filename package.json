@@ -54,7 +54,7 @@
     "debug": "4.3.3",
     "execa": "9.5.2",
     "listr2": "8.2.5",
-    "micromatch": "4.0.4",
+    "micromatch": "4.0.8",
     "package-manager-detector": "1.1.0"
   },
   "devDependencies": {
