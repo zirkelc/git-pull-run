@@ -38,7 +38,7 @@
     "clean": "rimraf dist",
     "format": "biome check --write",
     "lint": "biome check",
-    "prepare": "husky",
+    "prepare": "husky || true",
     "prepublishOnly": "npm run build",
     "release:minor": "npm version $(semver $npm_package_version -i minor) && npm publish --tag latest",
     "release:next": "npm version $(semver $npm_package_version -i prerelease --preid next ) && npm publish --tag next",
