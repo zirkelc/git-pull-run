@@ -66,7 +66,7 @@
     "@swc/jest": "0.2.37",
     "@total-typescript/tsconfig": "1.0.4",
     "@types/debug": "4.1.7",
-    "@types/jest": "29.2.0",
+    "@types/jest": "29.5.14",
     "@types/micromatch": "4.0.9",
     "@types/node": "22.13.14",
     "git-pull-run": "latest",
