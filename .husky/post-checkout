@@ -1,1 +1,1 @@
-npx --yes -- git-pull-run@latest --install
+npx -- git-pull-run --install
