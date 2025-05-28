@@ -54,7 +54,7 @@
     "commander": "13.1.0",
     "debug": "4.4.1",
     "execa": "9.5.3",
-    "listr2": "8.2.5",
+    "listr2": "8.3.3",
     "micromatch": "4.0.8",
     "package-manager-detector": "1.1.0"
   },
