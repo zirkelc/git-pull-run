@@ -52,7 +52,7 @@
     "@commander-js/extra-typings": "13.1.0",
     "colorette": "2.0.20",
     "commander": "13.1.0",
-    "debug": "4.4.0",
+    "debug": "4.4.1",
     "execa": "9.5.2",
     "listr2": "8.2.5",
     "micromatch": "4.0.8",
