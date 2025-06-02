@@ -49,9 +49,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "@commander-js/extra-typings": "13.1.0",
+    "@commander-js/extra-typings": "14.0.0",
     "colorette": "2.0.20",
-    "commander": "13.1.0",
+    "commander": "14.0.0",
     "debug": "4.4.1",
     "execa": "9.5.3",
     "listr2": "8.3.3",
