@@ -61,9 +61,9 @@
   "devDependencies": {
     "@biomejs/biome": "2.1.4",
     "@gmrchk/cli-testing-library": "0.1.2",
-    "@swc/cli": "0.7.7",
-    "@swc/core": "1.11.29",
-    "@swc/jest": "0.2.38",
+    "@swc/cli": "0.7.8",
+    "@swc/core": "1.13.3",
+    "@swc/jest": "0.2.39",
     "@total-typescript/tsconfig": "1.0.4",
     "@types/debug": "4.1.12",
     "@types/jest": "29.5.14",
