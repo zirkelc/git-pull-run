@@ -1,6 +1,6 @@
 import { dim, green } from 'colorette';
-import { Listr } from 'listr2';
 import type { ListrTask } from 'listr2';
+import { Listr } from 'listr2';
 import { getAbsolutePath } from './getAbsolutePath.js';
 import { getChanges } from './getChanges.js';
 import { getGitDirectory } from './getGitDirectory.js';
@@ -48,7 +48,7 @@ export async function gitPullRun({
       },
       {
         title: message,
-        task: async (ctx, task) => {},
+        task: async (_ctx, _task) => {},
         rendererOptions: { persistentOutput: true },
         enabled: (ctx) =>
           !!message &&
@@ -61,7 +61,7 @@ export async function gitPullRun({
         task: (ctx, task): Listr => {
           const createTasks = (directory: string): ListrTask => ({
             title: `${dim(directory)}`,
-            task: async (ctx, task) =>
+            task: async (_ctx, task) =>
               task.newListr([
                 {
                   title: `${green(command)}`,
