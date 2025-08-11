@@ -68,7 +68,7 @@
     "@types/debug": "4.1.12",
     "@types/jest": "29.5.14",
     "@types/micromatch": "4.0.9",
-    "@types/node": "22.15.29",
+    "@types/node": "22.17.1",
     "git-pull-run": "latest",
     "husky": "9.1.7",
     "jest": "29.7.0",
