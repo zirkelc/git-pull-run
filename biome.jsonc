@@ -1,53 +1,34 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "files": {
+    "includes": ["**"],
+    "ignoreUnknown": true
+  },
   "vcs": {
     "enabled": true,
     "clientKind": "git",
     "useIgnoreFile": true
   },
-  "files": {
-    "ignoreUnknown": true,
-    "ignore": []
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
   },
   "formatter": {
     "enabled": true,
     "useEditorconfig": true
   },
-  "organizeImports": {
-    "enabled": true
-  },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true,
-      "suspicious": {
-        "noExplicitAny": "off"
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
       }
     }
   },
   "javascript": {
     "formatter": {
-      "quoteStyle": "single",
-      "semicolons": "always",
-      "trailingCommas": "all",
-      "arrowParentheses": "always"
+      "quoteStyle": "single"
     }
-  },
-  "json": {
-    "formatter": {
-      "trailingCommas": "none"
-    },
-    "parser": {
-      "allowComments": true,
-      "allowTrailingCommas": true
-    }
-  },
-  "overrides": [
-    {
-      "include": ["**/package.json"],
-      "formatter": {
-        "lineWidth": 1
-      }
-    }
-  ]
+  }
 }

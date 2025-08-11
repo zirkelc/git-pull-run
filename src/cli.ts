@@ -82,10 +82,6 @@ const program = new Command('git-pull-run')
       program.error(
         `error: required option '-p, --pattern <glob>' not specified`,
       );
-    } else if (!options.install && !options.pattern) {
-      program.error(
-        `error: required option '-p, --pattern <glob>' not specified`,
-      );
     }
 
     if (options.debug) debugLog.enable('git-pull-run*');
