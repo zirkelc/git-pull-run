@@ -19,26 +19,29 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
 
       - name: Setup Biome
-        uses: biomejs/setup-biome@454fa0d884737805f48d7dc236c1761a0ac3cc13 # v2
+        uses: biomejs/setup-biome@v2.6.0
 
       - name: Lint
-        run: biome ci --no-errors-on-unmatched .
+        run: biome ci .
 
   test:
     name: Test
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
 
       - name: Setup and Install
         id: install
-        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        uses: actions/setup-node@v5.0.0
         with:
-          node-version: 22.18.0
+          node-version-file: ".tool-versions"
+          cache: "npm"
 
       - name: Install
         run: npm install
@@ -53,13 +56,15 @@ jobs:
     if: github.ref == 'refs/heads/main'
 
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
 
       - name: Setup and Install
         id: install
-        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        uses: actions/setup-node@v5.0.0
         with:
-          node-version: 22.18.0
+          node-version-file: ".tool-versions"
+          cache: "npm"
 
       - name: Install
         run: npm install
@@ -69,7 +74,7 @@ jobs:
 
       - name: Publish to NPM
         id: publish
-        uses: JS-DevTools/npm-publish@7f8fe47b3bea1be0c3aec2b717c5ec1f3e03410b # v4
+        uses: JS-DevTools/npm-publish@v4.1.1
         with:
           token: ${{ secrets.NPM_TOKEN }}
           dry-run: false
@@ -89,7 +94,7 @@ jobs:
       - name: Create Release
         if: steps.publish.outputs.type != ''
         id: release
-        uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b # v1 # https://github.com/ncipollo/release-action
+        uses: ncipollo/release-action@v1.9.0
         with:
           allowUpdates: true
           generateReleaseNotes: true
