@@ -89,7 +89,7 @@ jobs:
       - name: Create Release
         if: steps.publish.outputs.type != ''
         id: release
-        uses: ncipollo/release-action@bcfe5470707e8832e12347755757cec0eb3c22af # v1 # https://github.com/ncipollo/release-action
+        uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b # v1 # https://github.com/ncipollo/release-action
         with:
           allowUpdates: true
           generateReleaseNotes: true
