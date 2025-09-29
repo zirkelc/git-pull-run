@@ -62,7 +62,7 @@
     "@biomejs/biome": "2.1.4",
     "@gmrchk/cli-testing-library": "0.1.2",
     "@swc/cli": "0.7.8",
-    "@swc/core": "1.13.3",
+    "@swc/core": "1.13.5",
     "@swc/jest": "0.2.39",
     "@total-typescript/tsconfig": "1.0.4",
     "@types/debug": "4.1.12",
