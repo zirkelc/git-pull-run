@@ -94,7 +94,7 @@ jobs:
       - name: Create Release
         if: steps.publish.outputs.type != ''
         id: release
-        uses: ncipollo/release-action@40bb172bd05f266cf9ba4ff965cb61e9ee5f6d01 # v1.9.0
+        uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b # v1.20.0
         with:
           allowUpdates: true
           generateReleaseNotes: true
