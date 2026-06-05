@@ -12,6 +12,7 @@
     ":automergeTesters",
     ":automergeTypes",
     ":enableVulnerabilityAlerts",
+    ":label(dependencies)",
     ":renovatePrefix"
   ],
   "baseBranches": ["$default"]
