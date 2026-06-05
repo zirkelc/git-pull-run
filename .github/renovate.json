@@ -5,14 +5,13 @@
     "config:js-app",
     "customManagers:biomeVersions",
     "customManagers:githubActionsVersions",
-    "npm:unpublishSafe",
     ":automergeBranch",
+    ":automergeDigest",
     ":automergeLinters",
     ":automergeStableNonMajor",
     ":automergeTesters",
     ":automergeTypes",
     ":enableVulnerabilityAlerts",
-    ":maintainLockFilesWeekly",
     ":renovatePrefix"
   ],
   "baseBranches": ["$default"]
