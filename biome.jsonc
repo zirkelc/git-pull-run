@@ -15,16 +15,15 @@
       "recommended": true
     }
   },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "recommended": true
+    }
+  },
   "formatter": {
     "enabled": true,
     "useEditorconfig": true
-  },
-  "assist": {
-    "actions": {
-      "source": {
-        "organizeImports": "on"
-      }
-    }
   },
   "javascript": {
     "formatter": {
