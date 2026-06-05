@@ -51,7 +51,7 @@
   "dependencies": {
     "@commander-js/extra-typings": "14.0.0",
     "colorette": "2.0.20",
-    "commander": "14.0.1",
+    "commander": "15.0.0",
     "debug": "4.4.3",
     "execa": "9.6.0",
     "listr2": "9.0.4",
