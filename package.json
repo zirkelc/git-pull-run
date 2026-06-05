@@ -25,7 +25,9 @@
     "hooks",
     "post-merge"
   ],
-  "bin": "./dist/cli.js",
+  "bin": {
+    "git-pull-run": "dist/cli.js"
+  },
   "type": "module",
   "exports": "./dist/index.js",
   "files": [
