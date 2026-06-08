@@ -15,5 +15,5 @@
     ":label(dependencies)",
     ":renovatePrefix"
   ],
-  "baseBranches": ["$default"]
+  "baseBranchPatterns": ["$default"]
 }
