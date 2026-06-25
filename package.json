@@ -65,7 +65,7 @@
     "@gmrchk/cli-testing-library": "0.1.2",
     "@jest/globals": "30.4.1",
     "@swc/cli": "0.8.1",
-    "@swc/core": "1.15.41",
+    "@swc/core": "1.15.43",
     "@swc/jest": "0.2.39",
     "@total-typescript/tsconfig": "1.0.4",
     "@types/debug": "4.1.13",
