@@ -58,7 +58,7 @@
     "execa": "9.6.1",
     "listr2": "10.2.2",
     "micromatch": "4.0.8",
-    "package-manager-detector": "1.6.0"
+    "package-manager-detector": "1.7.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.1",
