@@ -70,7 +70,7 @@
     "@total-typescript/tsconfig": "1.0.4",
     "@types/debug": "4.1.13",
     "@types/micromatch": "4.0.10",
-    "@types/node": "24.13.2",
+    "@types/node": "24.13.3",
     "git-pull-run": "latest",
     "husky": "9.1.7",
     "jest": "30.4.2",
