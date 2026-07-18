@@ -61,7 +61,7 @@
     "package-manager-detector": "1.7.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.3",
+    "@biomejs/biome": "2.5.4",
     "@gmrchk/cli-testing-library": "0.1.2",
     "@jest/globals": "30.4.1",
     "@swc/cli": "0.8.1",
