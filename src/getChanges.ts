@@ -1,6 +1,6 @@
 import { cwd } from 'node:process';
 import debugLog from 'debug';
-import micromatch from 'micromatch';
+import picomatch from 'picomatch';
 import { runCommand } from './runCommand.js';
 
 const debug = debugLog('git-pull-run:getChanges');
@@ -14,7 +14,8 @@ export async function getChanges(pattern: string): Promise<string[]> {
   const files = result.split('\n');
   debug('Changed files:', files);
 
-  const changes = micromatch(files, pattern);
+  const isMatch = picomatch(pattern);
+  const changes = files.filter((file) => isMatch(file));
   debug(`Changes that match pattern '${pattern}':`, changes);
 
   // ctx.changes = changes;
