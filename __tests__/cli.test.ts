@@ -58,7 +58,7 @@ describe('Run CLI options', () => {
   "-i, --install            detect package manager and run install",
   "-p, --pattern <glob>     pattern to match files (required)",
   "-c, --command <command>  execute shell command for each matched file",
-  "-s, --script <script>    execute npm script for each matched file",
+  "-s, --script <script>    execute script for each matched file",
   "-m, --message <message>  print message to the console if matches were found",
   "-d, --debug              print additional debug information (default: false)",
   "-o, --once               run command only once if any files match the pattern",
