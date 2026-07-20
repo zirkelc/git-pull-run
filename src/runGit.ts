@@ -3,11 +3,11 @@ import { type ExecaError, execa } from 'execa';
 
 const debug = debugLog('git-pull-run:runGit');
 
-export async function runGit(cmd: string): Promise<string> {
-  debug(`Running git '${cmd}'`);
+export async function runGit(gitCmd: string): Promise<string> {
+  debug(`Running git '${gitCmd}'`);
 
   try {
-    const cmdProcess = execa`${cmd}`;
+    const cmdProcess = execa('git', gitCmd.split(' '));
     debug.enabled && cmdProcess.stdout?.pipe(process.stdout);
 
     const { stdout, exitCode } = await cmdProcess;
