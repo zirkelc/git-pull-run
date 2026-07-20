@@ -1,3 +1,4 @@
+import process from 'node:process';
 import debugLog from 'debug';
 import { type ExecaError, execa } from 'execa';
 
