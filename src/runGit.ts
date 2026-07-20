@@ -1,5 +1,5 @@
 import debugLog from 'debug';
-import { type ExecaError, execaCommand } from 'execa';
+import { type ExecaError, execa } from 'execa';
 
 const debug = debugLog('git-pull-run:runGit');
 
@@ -7,7 +7,7 @@ export async function runGit(cmd: string): Promise<string> {
   debug(`Running git '${cmd}'`);
 
   try {
-    const cmdProcess = execaCommand(cmd);
+    const cmdProcess = execa`${cmd}`;
     debug.enabled && cmdProcess.stdout?.pipe(process.stdout);
 
     const { stdout, exitCode } = await cmdProcess;
