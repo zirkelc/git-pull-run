@@ -1,5 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "baseBranchPatterns": ["$default"],
   "extends": [
     "config:best-practices",
     "config:js-app",
@@ -15,6 +16,5 @@
     ":enableVulnerabilityAlerts",
     ":label(dependencies)",
     ":renovatePrefix"
-  ],
-  "baseBranchPatterns": ["$default"]
+  ]
 }
