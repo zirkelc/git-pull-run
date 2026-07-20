@@ -6,19 +6,19 @@ import { getChanges } from './getChanges.js';
 import { getGitDirectory } from './getGitDirectory.js';
 import { runCommand } from './runCommand.js';
 
-export type Options = {
+export interface Options {
   pattern: string;
   message: string;
   command: string;
   script: string;
   debug: boolean;
   once: boolean;
-};
+}
 
-export type Context = {
+export interface Context {
   gitDir: string;
   changes: string[];
-};
+}
 
 export async function gitPullRun({
   pattern,
