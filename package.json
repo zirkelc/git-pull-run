@@ -33,6 +33,9 @@
   "files": [
     "dist"
   ],
+  "workspaces": [
+    "."
+  ],
   "scripts": {
     "prebuild": "tsc && npm run format && npm run clean",
     "build": "swc src -d dist --strip-leading-paths",
@@ -70,7 +73,7 @@
     "@types/debug": "4.1.13",
     "@types/node": "24.13.3",
     "@types/picomatch": "4.0.3",
-    "git-pull-run": "latest",
+    "git-pull-run": "*",
     "husky": "9.1.7",
     "jest": "30.4.2",
     "rimraf": "6.1.3",
