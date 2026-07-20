@@ -21,7 +21,7 @@ const commandOption = new Option(
 );
 const scriptOption = new Option(
   '-s, --script <script>',
-  'execute npm script for each matched file',
+  'execute script for each matched file',
 );
 const messageOption = new Option(
   '-m, --message <message>',

@@ -69,8 +69,8 @@ export async function gitPullRun({
                   enabled: () => !!command,
                 },
                 {
-                  title: `npm run ${green(script)}`,
-                  task: () => runScript(script, directory),
+                  title: `${command} run ${green(script)}`,
+                  task: () => runScript(command, script, directory),
                   enabled: () => !!script,
                 },
               ]),
