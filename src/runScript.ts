@@ -3,12 +3,11 @@ import { type ExecaError, execa } from 'execa';
 
 const debug = debugLog('git-pull-run:runScript');
 
-export async function runScript(script: string, cwd: string): Promise<string> {
+export async function runScript(command: string, script: string, cwd: string): Promise<string> {
   debug(`Running script '${script}' in directory '${cwd}'`);
 
   try {
-    const commands = ['run-script', script];
-    const cmdProcess = execa('npm', commands, { cwd });
+    const cmdProcess = execa(command, ['run', script], { cwd });
     debug.enabled && cmdProcess.stdout?.pipe(process.stdout);
 
     const { stdout, exitCode } = await cmdProcess;
