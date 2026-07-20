@@ -1,13 +1,14 @@
+import { cwd } from 'node:process';
 import debugLog from 'debug';
-import { runGit } from './runGit.js';
+import { runCommand } from './runCommand.js';
 
 const debug = debugLog('git-pull-run:getGitDirectory');
 
 export async function getGitDirectory(): Promise<string> {
   debug('Get git directory');
 
-  const cmd = 'rev-parse --show-toplevel';
-  const gitDir = await runGit(cmd);
+  const cmd = 'git rev-parse --show-toplevel';
+  const gitDir = await runCommand(cmd, cwd());
 
   debug('Git directory:', gitDir);
 

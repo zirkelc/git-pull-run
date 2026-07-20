@@ -25,6 +25,29 @@
       "preset": "recommended"
     }
   },
+  "overrides": [
+    {
+      "assist": {
+        "actions": {
+          "source": {
+            "useSortedKeys": "off",
+            "useSortedPackageJson": "on"
+          }
+        }
+      },
+      "includes": ["package.json"]
+    },
+    {
+      "assist": {
+        "actions": {
+          "source": {
+            "useSortedKeys": "on"
+          }
+        }
+      },
+      "includes": ["**/*.json", "**/*.jsonc", "!package.json"]
+    }
+  ],
   "vcs": {
     "clientKind": "git",
     "enabled": true,

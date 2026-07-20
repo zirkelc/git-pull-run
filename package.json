@@ -2,16 +2,6 @@
   "name": "git-pull-run",
   "version": "1.6.3",
   "description": "Run commands and scripts after git pull",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zirkelc/git-pull-run.git"
-  },
-  "bugs": {
-    "url": "https://github.com/zirkelc/git-pull-run/issues"
-  },
-  "homepage": "https://github.com/zirkelc/git-pull-run#readme",
-  "author": "Christian Zirkel",
   "keywords": [
     "git",
     "pull",
@@ -25,16 +15,26 @@
     "hooks",
     "post-merge"
   ],
+  "homepage": "https://github.com/zirkelc/git-pull-run#readme",
+  "bugs": {
+    "url": "https://github.com/zirkelc/git-pull-run/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zirkelc/git-pull-run.git"
+  },
+  "license": "MIT",
+  "author": "Christian Zirkel",
+  "type": "module",
+  "exports": "./dist/index.js",
   "bin": {
     "git-pull-run": "dist/cli.js"
   },
-  "type": "module",
-  "exports": "./dist/index.js",
   "files": [
     "dist"
   ],
   "scripts": {
-    "prebuild": "npm run clean",
+    "prebuild": "tsc && npm run format && npm run clean",
     "build": "swc src -d dist --strip-leading-paths",
     "build:watch": "npm run build -- --watch",
     "clean": "rimraf dist",
@@ -57,8 +57,8 @@
     "debug": "4.4.3",
     "execa": "10.0.0",
     "listr2": "10.2.2",
-    "micromatch": "4.0.8",
-    "package-manager-detector": "1.7.0"
+    "package-manager-detector": "1.7.0",
+    "picomatch": "^4.0.5"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.4",
@@ -67,10 +67,9 @@
     "@swc/cli": "0.8.1",
     "@swc/core": "1.15.43",
     "@swc/jest": "0.2.39",
-    "@total-typescript/tsconfig": "1.0.4",
     "@types/debug": "4.1.13",
-    "@types/micromatch": "4.0.10",
     "@types/node": "24.13.3",
+    "@types/picomatch": "^4.0.3",
     "git-pull-run": "latest",
     "husky": "9.1.7",
     "jest": "30.4.2",

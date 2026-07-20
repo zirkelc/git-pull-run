@@ -5,21 +5,20 @@ import { getAbsolutePath } from './getAbsolutePath.js';
 import { getChanges } from './getChanges.js';
 import { getGitDirectory } from './getGitDirectory.js';
 import { runCommand } from './runCommand.js';
-import { runScript } from './runScript.js';
 
-export type Options = {
+export interface Options {
   pattern: string;
   message: string;
   command: string;
   script: string;
   debug: boolean;
   once: boolean;
-};
+}
 
-export type Context = {
+export interface Context {
   gitDir: string;
   changes: string[];
-};
+}
 
 export async function gitPullRun({
   pattern,
@@ -70,7 +69,7 @@ export async function gitPullRun({
                 },
                 {
                   title: `${command} run ${green(script)}`,
-                  task: () => runScript(command, script, directory),
+                  task: () => runCommand(`${command} run ${script}`, directory),
                   enabled: () => !!script,
                 },
               ]),
