@@ -43,7 +43,7 @@ const packageJsonPath = join(
   '../../package.json',
 );
 const packageJson = JSON.parse(readFileSync(packageJsonPath).toString());
-const version = packageJson.version;
+const { version } = packageJson;
 
 const program = new Command('git-pull-run')
   .name('git-pull-run')
