@@ -55,7 +55,7 @@
     "colorette": "2.0.20",
     "commander": "15.0.0",
     "debug": "4.4.3",
-    "execa": "9.6.1",
+    "execa": "10.0.0",
     "listr2": "10.2.2",
     "micromatch": "4.0.8",
     "package-manager-detector": "1.7.0"
