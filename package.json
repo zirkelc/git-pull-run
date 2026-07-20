@@ -1,6 +1,6 @@
 {
   "name": "git-pull-run",
-  "version": "1.6.3",
+  "version": "2.0.0",
   "description": "Run commands and scripts after git pull",
   "keywords": [
     "git",
