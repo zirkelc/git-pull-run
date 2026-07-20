@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-import fs from 'node:fs';
-import path from 'node:path';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import process, { argv } from 'node:process';
 import { fileURLToPath } from 'node:url';
 import { Command, Option } from '@commander-js/extra-typings';
 import debugLog from 'debug';
@@ -37,11 +38,11 @@ const onceOption = new Option(
 );
 
 const debug = debugLog('git-pull-run:cli');
-const packageJsonPath = path.join(
+const packageJsonPath = join(
   fileURLToPath(import.meta.url),
   '../../package.json',
 );
-const packageJson = JSON.parse(fs.readFileSync(packageJsonPath).toString());
+const packageJson = JSON.parse(readFileSync(packageJsonPath).toString());
 const version = packageJson.version;
 
 const program = new Command('git-pull-run')
@@ -84,7 +85,9 @@ const program = new Command('git-pull-run')
       );
     }
 
-    if (options.debug) debugLog.enable('git-pull-run*');
+    if (options.debug) {
+      debugLog.enable('git-pull-run*');
+    }
 
     debug(`Started git-pull-run@${version}`);
 
@@ -105,4 +108,4 @@ const program = new Command('git-pull-run')
       });
   });
 
-await program.parseAsync(process.argv);
+await program.parseAsync(argv);
