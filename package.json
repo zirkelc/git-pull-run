@@ -68,7 +68,7 @@
     "@gmrchk/cli-testing-library": "0.1.2",
     "@jest/globals": "30.4.1",
     "@swc/cli": "0.8.1",
-    "@swc/core": "1.15.43",
+    "@swc/core": "1.15.46",
     "@swc/jest": "0.2.39",
     "@types/debug": "4.1.13",
     "@types/node": "24.13.3",
