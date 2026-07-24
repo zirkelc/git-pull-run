@@ -60,7 +60,7 @@
     "debug": "4.4.3",
     "execa": "10.0.0",
     "listr2": "10.2.2",
-    "package-manager-detector": "1.7.0",
+    "package-manager-detector": "1.8.0",
     "picomatch": "4.0.5"
   },
   "devDependencies": {
