@@ -64,7 +64,7 @@
     "picomatch": "4.0.5"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.4",
+    "@biomejs/biome": "2.5.5",
     "@gmrchk/cli-testing-library": "0.1.2",
     "@jest/globals": "30.4.1",
     "@swc/cli": "0.8.1",
