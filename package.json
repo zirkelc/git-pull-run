@@ -61,7 +61,7 @@
     "execa": "10.0.1",
     "listr2": "11.0.0",
     "package-manager-detector": "1.8.0",
-    "picomatch": "4.0.5"
+    "picomatch": "4.0.7"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.10",
