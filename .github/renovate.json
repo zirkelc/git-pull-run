@@ -16,5 +16,9 @@
     ":enableVulnerabilityAlerts",
     ":label(dependencies)",
     ":renovatePrefix"
-  ]
+  ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true
+  }
 }
