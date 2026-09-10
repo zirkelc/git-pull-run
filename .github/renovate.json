@@ -18,7 +18,7 @@
     ":renovatePrefix"
   ],
   "lockFileMaintenance": {
-    "enabled": true,
-    "automerge": true
+    "automerge": true,
+    "enabled": true
   }
 }
